@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "9ee2",
+      "isManager": true,
+      "fullName": "ali",
+      "email": "aa@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "5e1d",
+      "isManager": false,
+      "fullName": "ali",
+      "email": "kuat@tdcis.kz",
+      "password": "123456"
+    }
+  ],
+  "applications": []
+}
