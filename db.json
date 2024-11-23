@@ -13,7 +13,60 @@
       "fullName": "ali",
       "email": "kuat@tdcis.kz",
       "password": "123456"
+    },
+    {
+      "id": "5370",
+      "isManager": false,
+      "fullName": "alisher44",
+      "email": "aleasherN91@gmail.com",
+      "password": "123456"
     }
   ],
-  "applications": []
+  "applications": [
+    {
+      "id": "5ff4",
+      "description": "1234",
+      "file": "download.png",
+      "fullName": "ali",
+      "email": "aa@gmail.com",
+      "submittedUsersEmail": "kuat@tdcis.kz",
+      "status": "Pending"
+    },
+    {
+      "id": "2836",
+      "description": "asd",
+      "file": "download.png",
+      "fullName": "alisher44",
+      "email": "kuat@tdcis.kz",
+      "submittedUsersEmail": "kuat@tdcis.kz",
+      "status": "Pending"
+    },
+    {
+      "id": "dd9d",
+      "description": "asd123",
+      "file": "download.png",
+      "fullName": "ali",
+      "email": "kua22t@tdcis.kz",
+      "submittedUsersEmail": "aleasherN91@gmail.com",
+      "status": "Pending"
+    },
+    {
+      "id": "0bc0",
+      "description": "asdasd",
+      "file": "download.png",
+      "fullName": "alisher44",
+      "email": "aa2@gmail.com",
+      "submittedUsersEmail": "aleasherN91@gmail.com",
+      "status": "Pending"
+    },
+    {
+      "id": "73cb",
+      "description": "142142",
+      "file": "download.png",
+      "fullName": "alisher44as",
+      "email": "ali@gmail.com",
+      "submittedUsersEmail": "kuat@tdcis.kz",
+      "status": "Pending"
+    }
+  ]
 }

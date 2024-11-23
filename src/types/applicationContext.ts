@@ -1,18 +1,32 @@
 import { createContext } from "react";
 
-export type Application = {
-  id: string;
-  userId: string;
+export type ApplicationData = {
   fullName: string;
   email: string;
   description: string;
-  fileUrl: string;
-  status: "Pending" | "Reviewed" | "Approved" | "Rejected";
+  file: FileList;
+};
+
+export enum ApplicationStatus {
+  Pending = "Pending",
+  Approved = "Approved",
+  Rejected = "Rejected",
+}
+
+export type Application = {
+  id: string;
+  fullName: string;
+  submittedUsersEmail: string;
+  email: string;
+  description: string;
+  file: FileList | string;
+  status: ApplicationStatus;
   comments?: string;
 };
 
 type ApplicationsContextType = {
   applications: Application[];
+  doesApplicantExist: (email: string) => boolean;
   submitNewApplication: (application: Application) => Promise<void>;
   updateApplicationStatus: (
     id: string,
@@ -20,6 +34,6 @@ type ApplicationsContextType = {
   ) => Promise<void>;
 };
 
-export const ApplicationsContext = createContext<ApplicationsContextType | null>(
-  null
-);
+export const ApplicationsContext = createContext<
+  ApplicationsContextType | undefined
+>(undefined);

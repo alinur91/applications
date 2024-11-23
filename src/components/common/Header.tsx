@@ -19,6 +19,7 @@ const Header = () => {
     : "/user/listing";
 
   const imageSrc = loggedInUser?.isManager ? managerAvatar : userAvatar;
+  
   return (
     <header className="bg-blue-600 text-white p-4 shadow-md">
       <div className="flex items-center justify-between">

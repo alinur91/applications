@@ -1,40 +1,41 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from "../../components/ui/Input";
-
-type FormData = {
-  fullName: string;
-  email: string;
-  description: string;
-  file: FileList;
-};
+import { Application, ApplicationStatus } from "../../types/applicationContext";
+import { useApplicationsContext } from "../../hooks/useApplicationsContext";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const ApplicationForm = () => {
+  const { submitNewApplication, doesApplicantExist } = useApplicationsContext();
+  const { loggedInUser } = useAuthContext();
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<Application>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    // Handle file submission
-    const file = data.file?.[0];
-    const formData = new FormData();
-    formData.append("fullName", data.fullName);
-    formData.append("email", data.email);
-    formData.append("description", data.description);
-    if (file) {
-      formData.append("file", file);
+  const onSubmit: SubmitHandler<Application> = async (data) => {
+    if (doesApplicantExist(data.email)) {
+      alert("Submitted email exists in the database.Try another one!");
+    } else {
+      let file = "";
+      // Ensure file is a FileList and extract the first file's name
+      if (data.file instanceof FileList && data.file[0]) {
+        file = data.file[0].name;
+      }
+
+      const newApplication = {
+        ...data,
+        submittedUsersEmail: loggedInUser?.email as string,
+        status: ApplicationStatus.Pending,
+        file,
+      };
+      await submitNewApplication(newApplication);
+      navigate("/user/listing");
     }
-
-    // Simulate API submission
-    console.log("Form submitted", {
-      fullName: data.fullName,
-      email: data.email,
-      description: data.description,
-      file,
-    });
-
-    alert("Application submitted successfully!");
   };
 
   return (

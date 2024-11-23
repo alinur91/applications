@@ -8,7 +8,7 @@ export type User = {
 };
 
 export type AuthContextType = {
-  users: User[];
+  registeredUsersList: User[];
   loggedInUser: User | null;
   registerUser: (user: User) => void;
   isEmailRegistered: (email: string) => boolean;
@@ -16,4 +16,6 @@ export type AuthContextType = {
   setLoggedInUserData: (user: User | null) => void;
 };
 
-export const Auth = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);

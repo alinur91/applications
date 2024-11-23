@@ -24,10 +24,9 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const submitNewApplication = async (application: Application) => {
-    setApplications((prev) => [...prev, application]);
-
     try {
       await axios.post(BASE_URL, application);
+      setApplications((prev) => [...prev, application]);
     } catch (error) {
       console.error("Error submitting application:", error);
       throw error;
@@ -51,9 +50,17 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const doesApplicantExist = (email: string) =>
+    applications.some((app) => app.email === email);
+
   return (
     <ApplicationsContext.Provider
-      value={{ applications, submitNewApplication, updateApplicationStatus }}
+      value={{
+        applications,
+        submitNewApplication,
+        updateApplicationStatus,
+        doesApplicantExist,
+      }}
     >
       {children}
     </ApplicationsContext.Provider>
