@@ -13,7 +13,7 @@ const ApplicationsTable = ({
     render: (app: Application) => React.ReactNode;
   }[];
 }) => {
-  const { loggedInUser } = useAuthContext();
+  const { isManager } = useAuthContext();
 
   const statusClassMap: Record<ApplicationStatus, string> = {
     [ApplicationStatus.Pending]: "text-yellow-600",
@@ -63,7 +63,7 @@ const ApplicationsTable = ({
             <tr
               key={application.id}
               className={`border-b hover:bg-gray-50 ${
-                loggedInUser?.isManager ? "cursor-pointer" : "cursor-auto"
+                isManager ? "cursor-pointer" : "cursor-auto"
               }`}
               onClick={() => onRowClick?.(application.id)}
             >

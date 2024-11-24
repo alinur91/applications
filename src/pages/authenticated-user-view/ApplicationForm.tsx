@@ -4,7 +4,6 @@ import { Application, ApplicationStatus } from "../../types/applicationContext";
 import { useApplicationsContext } from "../../hooks/useApplicationsContext";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { v4 as uuidv4 } from "uuid";
 
 const ApplicationForm = () => {
   const { submitNewApplication } = useApplicationsContext();
@@ -32,7 +31,6 @@ const ApplicationForm = () => {
 
     const newApplication = {
       ...data,
-      applicationId: uuidv4(),
       status: ApplicationStatus.Pending,
       file,
     };

@@ -30,8 +30,6 @@ const RegisterForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-md bg-white p-6 rounded-md shadow-lg mx-auto"
     >
-      <h1 className="text-lg font-bold mb-4">Register</h1>
-
       <Input
         label="Full Name"
         name="fullName"

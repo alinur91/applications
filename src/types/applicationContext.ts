@@ -8,7 +8,6 @@ export enum ApplicationStatus {
 
 export type Application = {
   id: string;
-  applicationId: string;
   fullName: string;
   email: string;
   description: string;
@@ -21,7 +20,6 @@ export type Application = {
 type ApplicationsContextType = {
   applications: Application[];
   getApplications: () => void;
-  doesApplicantExist: (email: string) => boolean;
   submitNewApplication: (application: Application) => void;
   getApplicationById: (id: string) => Promise<Application | null>;
   updateApplication: (

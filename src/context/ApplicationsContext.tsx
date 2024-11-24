@@ -58,9 +58,6 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const doesApplicantExist = (email: string) =>
-    applications.some((app) => app.email === email);
-
   return (
     <ApplicationsContext.Provider
       value={{
@@ -68,7 +65,6 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
         submitNewApplication,
         getApplicationById,
         updateApplication,
-        doesApplicantExist,
         getApplications,
       }}
     >
