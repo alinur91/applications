@@ -1,12 +1,5 @@
 import { createContext } from "react";
 
-export type ApplicationData = {
-  fullName: string;
-  email: string;
-  description: string;
-  file: FileList;
-};
-
 export enum ApplicationStatus {
   Pending = "Pending",
   Approved = "Approved",
@@ -15,20 +8,23 @@ export enum ApplicationStatus {
 
 export type Application = {
   id: string;
+  applicationId: string;
   fullName: string;
-  submittedUsersEmail: string;
   email: string;
   description: string;
   file: FileList | string;
   status: ApplicationStatus;
-  comments?: string;
+  comment?: string;
+  reviewedBy?: string;
 };
 
 type ApplicationsContextType = {
   applications: Application[];
+  getApplications: () => void;
   doesApplicantExist: (email: string) => boolean;
-  submitNewApplication: (application: Application) => Promise<void>;
-  updateApplicationStatus: (
+  submitNewApplication: (application: Application) => void;
+  getApplicationById: (id: string) => Promise<Application | null>;
+  updateApplication: (
     id: string,
     updates: Partial<Application>
   ) => Promise<void>;

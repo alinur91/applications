@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SubmissionsList from "./pages/authenticated-user-view/SubmissionsList";
 import ApplicationForm from "./pages/authenticated-user-view/ApplicationForm";
 import Login from "./pages/auth/Login";
@@ -12,6 +12,8 @@ import AuthLayout from "./components/common/AuthLayout";
 
 const App = () => (
   <Routes>
+    <Route path="/" element={<Navigate to="/auth/login" replace />} />
+
     <Route
       path="/auth"
       element={
@@ -24,6 +26,7 @@ const App = () => (
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
     </Route>
+
     <Route
       path="/user"
       element={
@@ -36,6 +39,7 @@ const App = () => (
       <Route path="listing" element={<SubmissionsList />} />
       <Route path="submit" element={<ApplicationForm />} />
     </Route>
+
     <Route
       path="/manager"
       element={

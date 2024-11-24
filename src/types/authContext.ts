@@ -8,9 +8,10 @@ export type User = {
 };
 
 export type AuthContextType = {
-  registeredUsersList: User[];
+  registeredAccountsList: User[];
+  isManager: boolean | undefined;
   loggedInUser: User | null;
-  registerUser: (user: User) => void;
+  registerAccount: (user: User) => void;
   isEmailRegistered: (email: string) => boolean;
   findUserByEmail: (email: string) => User | undefined;
   setLoggedInUserData: (user: User | null) => void;

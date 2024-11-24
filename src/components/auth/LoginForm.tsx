@@ -17,11 +17,11 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<User> = (userData) => {
     const foundUser = findUserByEmail(userData.email);
 
-    if (foundUser) {
+    if (foundUser && foundUser.password === userData.password) {
       setLoggedInUserData(foundUser);
       navigate(foundUser.isManager ? "/manager/listing" : "/user/listing");
     } else {
-      alert("User not found! Please register.");
+      alert("Invalid email or password. Please try again.");
     }
   };
 

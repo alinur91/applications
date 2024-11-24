@@ -4,22 +4,22 @@ import managerAvatar from "../../images/avatar.jpg";
 import userAvatar from "../../images/avatar2.jpg";
 
 const Header = () => {
-  const { setLoggedInUserData, loggedInUser } = useAuthContext();
+  const { setLoggedInUserData, loggedInUser, isManager } = useAuthContext();
   const location = useLocation();
 
   const handleSignout = () => {
     setLoggedInUserData(null);
   };
 
-  const showFillOutFormBtn =
-    !loggedInUser?.isManager && !location.pathname.includes("/submit");
+  const showFillOutFormButton =
+    !isManager && !location.pathname.includes("/submit");
 
-  const linkToHome = loggedInUser?.isManager
-    ? "/manager/listing"
-    : "/user/listing";
+  const linkToHome = isManager ? "/manager/listing" : "/user/listing";
 
-  const imageSrc = loggedInUser?.isManager ? managerAvatar : userAvatar;
-  
+  const imageSrc = isManager ? managerAvatar : userAvatar;
+
+  const role = isManager ? "Manager" : "User";
+
   return (
     <header className="bg-blue-600 text-white p-4 shadow-md">
       <div className="flex items-center justify-between">
@@ -30,11 +30,11 @@ const Header = () => {
             alt="User Avatar"
           />
           <span className="font-semibold text-lg">
-            Welcome, {loggedInUser?.fullName || "User"}
+            Welcome, {role} {loggedInUser?.fullName}
           </span>
         </Link>
         <div className="flex items-center space-x-4">
-          {showFillOutFormBtn && (
+          {showFillOutFormButton && (
             <Link
               to="/user/submit"
               className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-200"

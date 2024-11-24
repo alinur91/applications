@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../../types/authContext";
 
 const RegisterForm = () => {
-  const { registerUser, isEmailRegistered, setLoggedInUserData } =
+  const { registerAccount, isEmailRegistered, setLoggedInUserData } =
     useAuthContext();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const RegisterForm = () => {
     if (isEmailRegistered(userData.email)) {
       alert("User already exists in the database!");
     } else {
-      registerUser(userData);
+      registerAccount(userData);
       setLoggedInUserData(userData);
       navigate(userData.isManager ? "/manager/listing" : "/user/listing");
     }

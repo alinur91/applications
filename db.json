@@ -1,72 +1,145 @@
 {
   "users": [
     {
-      "id": "9ee2",
-      "isManager": true,
+      "id": "2237",
+      "isManager": false,
       "fullName": "ali",
       "email": "aa@gmail.com",
       "password": "123456"
     },
     {
-      "id": "5e1d",
-      "isManager": false,
+      "id": "24a9",
+      "isManager": true,
       "fullName": "ali",
       "email": "kuat@tdcis.kz",
-      "password": "123456"
+      "password": "123123"
     },
     {
-      "id": "5370",
+      "id": "fa59",
       "isManager": false,
-      "fullName": "alisher44",
+      "fullName": "alisher44as",
       "email": "aleasherN91@gmail.com",
-      "password": "123456"
+      "password": "123123"
+    },
+    {
+      "id": "c4e1",
+      "isManager": false,
+      "fullName": "register",
+      "email": "poe_admin@tdcis.kz",
+      "password": "123123"
+    },
+    {
+      "id": "4832",
+      "isManager": true,
+      "fullName": "ali",
+      "email": "ali@gmail.com",
+      "password": "123123"
     }
   ],
   "applications": [
     {
-      "id": "5ff4",
-      "description": "1234",
-      "file": "download.png",
+      "id": "d1e7",
       "fullName": "ali",
       "email": "aa@gmail.com",
-      "submittedUsersEmail": "kuat@tdcis.kz",
-      "status": "Pending"
+      "description": "yes",
+      "file": "job-search-end-of-section-29.zip",
+      "applicationId": "2929d651-8edd-49bb-a11f-fb5f4225d422",
+      "status": "Approved",
+      "comment": "yes!",
+      "reviewedBy": "kuat@tdcis.kz"
     },
     {
-      "id": "2836",
-      "description": "asd",
-      "file": "download.png",
-      "fullName": "alisher44",
-      "email": "kuat@tdcis.kz",
-      "submittedUsersEmail": "kuat@tdcis.kz",
-      "status": "Pending"
-    },
-    {
-      "id": "dd9d",
-      "description": "asd123",
-      "file": "download.png",
+      "id": "6f6d",
       "fullName": "ali",
-      "email": "kua22t@tdcis.kz",
-      "submittedUsersEmail": "aleasherN91@gmail.com",
-      "status": "Pending"
-    },
-    {
-      "id": "0bc0",
+      "email": "aa@gmail.com",
       "description": "asdasd",
-      "file": "download.png",
-      "fullName": "alisher44",
-      "email": "aa2@gmail.com",
-      "submittedUsersEmail": "aleasherN91@gmail.com",
+      "file": "job-search-end-of-section-29 (1).zip",
+      "applicationId": "25248cea-9b77-4af0-80d8-3f7572804a90",
+      "status": "Rejected",
+      "comment": "nopoe\n",
+      "reviewedBy": "kuat@tdcis.kz"
+    },
+    {
+      "id": "ed48",
+      "fullName": "alisher44as",
+      "email": "aleasherN91@gmail.com",
+      "description": "yui",
+      "file": "job-search-end-of-section-19.zip",
+      "applicationId": "45b88016-0826-42bf-96c2-a0fb39ea4937",
+      "status": "Approved",
+      "comment": "yes",
+      "reviewedBy": "kuat@tdcis.kz"
+    },
+    {
+      "id": "3b93",
+      "fullName": "ali",
+      "email": "aa@gmail.com",
+      "description": "asd",
+      "file": "job-search-end-of-section-25 (1).zip",
+      "applicationId": "002a78d0-9fe6-416a-90ef-972ddc7a2bd4",
       "status": "Pending"
     },
     {
-      "id": "73cb",
-      "description": "142142",
-      "file": "download.png",
+      "id": "ea91",
       "fullName": "alisher44as",
-      "email": "ali@gmail.com",
-      "submittedUsersEmail": "kuat@tdcis.kz",
+      "email": "aleasherN91@gmail.com",
+      "description": "nmop",
+      "file": "job-search-end-of-section-19.zip",
+      "applicationId": "0757871b-deed-4868-b66d-f4a18d81521a",
+      "status": "Approved",
+      "comment": "yes",
+      "reviewedBy": "ali@gmail.com"
+    },
+    {
+      "id": "8fb0",
+      "fullName": "register",
+      "email": "poe_admin@tdcis.kz",
+      "description": "asd",
+      "file": "job-search-end-of-section-19.zip",
+      "applicationId": "07d0feb6-1b54-4c60-af09-79447a1c3966",
+      "status": "Approved",
+      "comment": "yes",
+      "reviewedBy": "ali@gmail.com"
+    },
+    {
+      "id": "af4d",
+      "fullName": "alisher44as",
+      "email": "aleasherN91@gmail.com",
+      "description": "reject it!",
+      "file": "job-search-end-of-section-19.zip",
+      "applicationId": "a9e7029f-22d6-4c3a-820e-5fe600e6ffc0",
       "status": "Pending"
+    },
+    {
+      "id": "3876",
+      "fullName": "ali",
+      "email": "aa@gmail.com",
+      "description": "asdasd",
+      "file": "job-search-end-of-section-19.zip",
+      "applicationId": "15ed0782-de15-48ba-8238-e11c30a6a28a",
+      "status": "Pending"
+    },
+    {
+      "id": "4946",
+      "fullName": "alisher44as",
+      "email": "aleasherN91@gmail.com",
+      "description": "men goi!",
+      "file": "job-search-end-of-section-29 (1).zip",
+      "applicationId": "b435c910-9515-4655-a847-f5a9b0e3fd85",
+      "status": "Rejected",
+      "comment": "yes",
+      "reviewedBy": "kuat@tdcis.kz"
+    },
+    {
+      "id": "0cea",
+      "fullName": "register",
+      "email": "poe_admin@tdcis.kz",
+      "description": "yes",
+      "file": "job-search-end-of-section-18.zip",
+      "applicationId": "1fe4b609-ae3a-4ced-92a6-d6af9781171e",
+      "status": "Rejected",
+      "comment": "123",
+      "reviewedBy": "ali@gmail.com"
     }
   ]
 }

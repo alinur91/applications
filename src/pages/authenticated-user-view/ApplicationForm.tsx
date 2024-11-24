@@ -4,9 +4,10 @@ import { Application, ApplicationStatus } from "../../types/applicationContext";
 import { useApplicationsContext } from "../../hooks/useApplicationsContext";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { v4 as uuidv4 } from "uuid";
 
 const ApplicationForm = () => {
-  const { submitNewApplication, doesApplicantExist } = useApplicationsContext();
+  const { submitNewApplication } = useApplicationsContext();
   const { loggedInUser } = useAuthContext();
 
   const navigate = useNavigate();
@@ -15,27 +16,28 @@ const ApplicationForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Application>();
+  } = useForm<Application>({
+    defaultValues: {
+      fullName: loggedInUser?.fullName,
+      email: loggedInUser?.email,
+    },
+  });
 
   const onSubmit: SubmitHandler<Application> = async (data) => {
-    if (doesApplicantExist(data.email)) {
-      alert("Submitted email exists in the database.Try another one!");
-    } else {
-      let file = "";
-      // Ensure file is a FileList and extract the first file's name
-      if (data.file instanceof FileList && data.file[0]) {
-        file = data.file[0].name;
-      }
-
-      const newApplication = {
-        ...data,
-        submittedUsersEmail: loggedInUser?.email as string,
-        status: ApplicationStatus.Pending,
-        file,
-      };
-      await submitNewApplication(newApplication);
-      navigate("/user/listing");
+    let file = "";
+    // Ensure file is a FileList and extract the first file's name
+    if (data.file instanceof FileList && data.file[0]) {
+      file = data.file[0].name;
     }
+
+    const newApplication = {
+      ...data,
+      applicationId: uuidv4(),
+      status: ApplicationStatus.Pending,
+      file,
+    };
+    submitNewApplication(newApplication);
+    navigate("/user/listing");
   };
 
   return (
@@ -44,35 +46,14 @@ const ApplicationForm = () => {
         Submit Application
       </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <Input
-          label="Full Name"
-          name="fullName"
-          placeholder="Enter your full name"
-          register={register}
-          validation={{
-            required: "Full Name is required",
-            minLength: {
-              value: 3,
-              message: "Full Name must be at least 3 characters long",
-            },
-          }}
-          error={errors.fullName?.message}
-        />
+        <Input disabled label="Full Name" name="fullName" register={register} />
 
         <Input
+          disabled
           label="Email"
           name="email"
           type="email"
-          placeholder="Enter your email"
           register={register}
-          validation={{
-            required: "Email is required",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "Invalid email format",
-            },
-          }}
-          error={errors.email?.message}
         />
 
         <div className="mb-6">

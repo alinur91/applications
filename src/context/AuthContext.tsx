@@ -5,9 +5,11 @@ import axios from "axios";
 const BASE_URL = "http://localhost:3000/users";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [registeredUsersList, setRegisteredUsers] = useState<User[]>([]);
+  const [registeredAccountsList, setRegisteredAccountsList] = useState<User[]>(
+    []
+  );
   const [loggedInUser, setLoggedInUser] = useState<null | User>(() => {
-    const storedUser = sessionStorage.getItem("user");
+    const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
@@ -19,48 +21,56 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getUsers = async () => {
     try {
       const response = await axios.get(BASE_URL);
-      setRegisteredUsers(response.data || []);
+      setRegisteredAccountsList(response.data || []);
     } catch (error) {
       console.error("Error adding user:", error);
     }
   };
 
-  const registerUser = async (user: User) => {
+  const registerAccount = async (user: User) => {
     try {
-      await axios.post(BASE_URL, user);
+      const response = await axios.post(BASE_URL, user);
+      const newUser = response.data;
+      setRegisteredAccountsList((prevRegiseredAccounts) => [
+        ...prevRegiseredAccounts,
+        newUser,
+      ]);
     } catch (error) {
       console.error("Error adding user:", error);
     }
   };
 
   const isEmailRegistered = (email: string): boolean =>
-    registeredUsersList.some(
+    registeredAccountsList.some(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
 
   const findUserByEmail = (email: string): User | undefined =>
-    registeredUsersList.find(
+    registeredAccountsList.find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
 
   const setLoggedInUserData = (userData: User | null) => {
     setLoggedInUser(userData);
     if (userData) {
-      sessionStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(userData));
     } else {
-      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
     }
   };
+
+  const isManager = loggedInUser?.isManager;
 
   return (
     <AuthContext.Provider
       value={{
-        registeredUsersList,
-        registerUser,
+        registeredAccountsList,
+        registerAccount,
         isEmailRegistered,
         findUserByEmail,
         setLoggedInUserData,
         loggedInUser,
+        isManager,
       }}
     >
       {children}

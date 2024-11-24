@@ -23,26 +23,34 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const getApplicationById = async (id: string): Promise<Application> => {
+    try {
+      const response = await axios.get(`${BASE_URL}/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching application with ID ${id}:`, error);
+      throw error;
+    }
+  };
+
   const submitNewApplication = async (application: Application) => {
     try {
-      await axios.post(BASE_URL, application);
-      setApplications((prev) => [...prev, application]);
+      const response = await axios.post(BASE_URL, application);
+      setApplications((prev) => [...prev, response.data]);
     } catch (error) {
       console.error("Error submitting application:", error);
       throw error;
     }
   };
 
-  const updateApplicationStatus = async (
-    applicationId: string,
+  const updateApplication = async (
+    id: string,
     updates: Partial<Application>
   ) => {
     try {
-      await axios.patch(`${BASE_URL}/${applicationId}`, updates);
+      await axios.patch(`${BASE_URL}/${id}`, updates);
       setApplications((prev) =>
-        prev.map((app) =>
-          app.id === applicationId ? { ...app, ...updates } : app
-        )
+        prev.map((app) => (app.id === id ? { ...app, ...updates } : app))
       );
     } catch (error) {
       console.error("Error updating application:", error);
@@ -58,8 +66,10 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
       value={{
         applications,
         submitNewApplication,
-        updateApplicationStatus,
+        getApplicationById,
+        updateApplication,
         doesApplicantExist,
+        getApplications,
       }}
     >
       {children}
