@@ -12,9 +12,10 @@ export type AuthContextType = {
   isManager: boolean | undefined;
   loggedInUser: User | null;
   registerAccount: (user: User) => void;
+  signOut: () => void;
   isEmailRegistered: (email: string) => boolean;
   findUserByEmail: (email: string) => User | undefined;
-  setLoggedInUserData: (user: User | null) => void;
+  setLoggedInUserData: (user: User) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(

@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const NotFound = () => {
-  const { setLoggedInUserData } = useAuthContext();
+  const { signOut } = useAuthContext();
 
   const handleLogout = () => {
-    setLoggedInUserData(null);
+    signOut();
   };
 
   return (

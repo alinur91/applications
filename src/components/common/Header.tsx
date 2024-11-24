@@ -4,11 +4,11 @@ import managerAvatar from "../../images/avatar.jpg";
 import userAvatar from "../../images/avatar2.jpg";
 
 const Header = () => {
-  const { setLoggedInUserData, loggedInUser, isManager } = useAuthContext();
+  const { signOut, loggedInUser, isManager } = useAuthContext();
   const location = useLocation();
 
   const handleSignout = () => {
-    setLoggedInUserData(null);
+    signOut();
   };
 
   const showFillOutFormButton =

@@ -50,13 +50,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
 
-  const setLoggedInUserData = (userData: User | null) => {
+  const setLoggedInUserData = (userData: User) => {
     setLoggedInUser(userData);
-    if (userData) {
-      localStorage.setItem("user", JSON.stringify(userData));
-    } else {
-      localStorage.removeItem("user");
-    }
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
+
+  const signOut = () => {
+    setLoggedInUser(null);
+    localStorage.removeItem("user");
   };
 
   const isManager = loggedInUser?.isManager;
@@ -69,6 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isEmailRegistered,
         findUserByEmail,
         setLoggedInUserData,
+        signOut,
         loggedInUser,
         isManager,
       }}
