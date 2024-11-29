@@ -8,8 +8,9 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 
 const ReviewApplication = () => {
   const [application, setApplication] = useState<Application | null>(null);
-  const [error, setError] = useState<string | null>(null); // Local error state
-  const [isLoading, setIsLoading] = useState(false); // Loading state for update
+  const [error, setError] = useState<string | null>(null);
+  const [updatingLoading, setUpdatingLoading] = useState(false);
+  const [getApplicationLoading, setGetApplicationLoading] = useState(false);
   const navigate = useNavigate();
   const { getApplicationById, updateApplication } = useApplicationsContext();
   const { loggedInUser } = useAuthContext();
@@ -32,7 +33,7 @@ const ReviewApplication = () => {
   });
 
   useEffect(() => {
-    setIsLoading(true);
+    setGetApplicationLoading(true);
 
     getApplicationById(id as string)
       .then((application) => {
@@ -40,11 +41,11 @@ const ReviewApplication = () => {
         if (application) reset(application);
       })
       .catch((e) => setError(e.message))
-      .finally(() => setIsLoading(false));
+      .finally(() => setGetApplicationLoading(false));
   }, [getApplicationById, id, reset]);
 
   const onSubmit: SubmitHandler<Application> = async (data) => {
-    setIsLoading(true); // Set loading to true when starting the update
+    setUpdatingLoading(true); // Set loading to true when starting the update
     const updatedApplication = {
       ...application,
       status: data.status,
@@ -61,14 +62,22 @@ const ReviewApplication = () => {
         "An error occurred while updating the application. Please try again."
       );
     } finally {
-      setIsLoading(false); // Set loading to false after the operation is complete
+      setUpdatingLoading(false); // Set loading to false after the operation is complete
     }
   };
+
+  if (getApplicationLoading) {
+    return (
+      <div className="text-center text-blue-600 text-lg font-medium animate-pulse mt-6">
+        Loading application form...
+      </div>
+    );
+  }
 
   if (error)
     return (
       <div className="text-center">
-        <p className="text-gray-600 mt-4">{error}</p>
+        <p className="text-red-600 text-lg font-medium">{error}</p>
         <Link
           to="/manager/listing"
           className="text-blue-600 hover:underline font-semibold mt-2 block"
@@ -78,7 +87,7 @@ const ReviewApplication = () => {
       </div>
     );
 
-  if (!error && application)
+  if (!getApplicationLoading && !error && application)
     return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6">
@@ -170,14 +179,14 @@ const ReviewApplication = () => {
           <div>
             <button
               type="submit"
-              disabled={isLoading} // Disable button when loading
+              disabled={updatingLoading} // Disable button when loading
               className={`w-full py-2 px-4 text-white font-semibold rounded-md transition duration-200 ${
-                isLoading
+                updatingLoading
                   ? "bg-blue-400 cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
-              {isLoading ? "Updating..." : "Update Application"}
+              {updatingLoading ? "Updating..." : "Update Application"}
             </button>
           </div>
         </form>

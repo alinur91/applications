@@ -62,8 +62,13 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
         prev.map((app) => (app.id === id ? { ...app, ...updates } : app))
       );
     } catch (error) {
-      console.error("Error updating application:", error);
-      throw error;
+      if (error instanceof Error) {
+        console.error("Error updating application:", error.message);
+        throw error; // Re-throw error to allow the form to handle it
+      } else {
+        console.error("An unexpected error occurred.");
+        throw new Error("An unexpected error occurred.");
+      }
     }
   };
 
