@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, ReactNode, useCallback } from "react";
 
 import { Application, ApplicationsContext } from "../types/applicationContext";
 
@@ -8,20 +8,24 @@ const BASE_URL = "http://localhost:3000/applications";
 
 export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
   const [applications, setApplications] = useState<Application[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    getApplications();
-  }, []);
-
-  const getApplications = async () => {
+  const getApplications = useCallback(async () => {
+    setIsError(null); // Reset error state
     try {
       const response = await axios.get(BASE_URL);
       setApplications(response.data || []);
     } catch (error) {
-      console.error("Error fetching applications:", error);
-      throw error;
+      if (error instanceof Error) {
+        setIsError(error);
+      } else {
+        setIsError(new Error("An unknown error occurred."));
+      }
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, []);
 
   const getApplicationById = async (id: string): Promise<Application> => {
     try {
@@ -38,8 +42,13 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
       const response = await axios.post(BASE_URL, application);
       setApplications((prev) => [...prev, response.data]);
     } catch (error) {
-      console.error("Error submitting application:", error);
-      throw error;
+      if (error instanceof Error) {
+        console.error("Error submitting application:", error.message);
+        throw error; // Re-throw error to allow the form to handle it
+      } else {
+        console.error("An unexpected error occurred.");
+        throw new Error("An unexpected error occurred.");
+      }
     }
   };
 
@@ -61,11 +70,13 @@ export const ApplicationsProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ApplicationsContext.Provider
       value={{
+        isLoading,
+        getApplications,
+        isError,
         applications,
         submitNewApplication,
         getApplicationById,
         updateApplication,
-        getApplications,
       }}
     >
       {children}

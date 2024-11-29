@@ -20,6 +20,8 @@ export type Application = {
 type ApplicationsContextType = {
   applications: Application[];
   getApplications: () => void;
+  isLoading: boolean;
+  isError: Error | null;
   submitNewApplication: (application: Application) => void;
   getApplicationById: (id: string) => Promise<Application | null>;
   updateApplication: (

@@ -3,7 +3,7 @@ import SubmissionsList from "./pages/authenticated-user-view/SubmissionsList";
 import ApplicationForm from "./pages/authenticated-user-view/ApplicationForm";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import ReviewApplication from "./pages/manager-view/ReviewApplication";
+import ReviewApplication from "./pages/manager-view/ReviewApplicationForm";
 import ManagerDashboard from "./pages/manager-view/ManagerDashboard";
 import CheckAuth from "./components/common/CheckAuth";
 import LoggedinLayout from "./components/common/LoggedinLayout";
@@ -39,7 +39,7 @@ const App = () => (
       <Route path="listing" element={<SubmissionsList />} />
       <Route path="submit" element={<ApplicationForm />} />
     </Route>
-
+    
     <Route
       path="/manager"
       element={
